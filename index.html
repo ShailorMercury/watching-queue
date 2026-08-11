@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expediente T-2026-DOOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sheet">
+  <header>
+    <div class="case-row">
+      <div class="case-id">Expediente N.º T-2026-DOOM &nbsp;·&nbsp; Rama: Vigilancia Multiversal</div>
+      <div class="stamp-tag" id="statusStamp">En curso</div>
+    </div>
+    <h1>Ruta a Avengers: Doomsday</h1>
+    <p class="subtitle">Orden de visionado recomendado antes del estreno. Marca cada expediente cerrado — el registro queda guardado.</p>
+    <div class="meta-strip">
+      <span>Estreno: <b>18 dic 2026</b></span>
+      <span id="countdownText">Calculando cuenta atrás…</span>
+      <span>Sede: <b>Disney+ / Cines</b></span>
+    </div>
+  </header>
+
+  <div class="progress-block">
+    <div class="rail-wrap">
+      <div class="rail-label">
+        <span>Progreso del expediente</span>
+        <span id="countText">0 / 20 cerrados</span>
+      </div>
+      <div class="rail">
+        <div class="rail-fill" id="railFill"></div>
+      </div>
+    </div>
+    <div class="ring-wrap">
+      <svg width="92" height="92" viewBox="0 0 92 92">
+        <circle class="ring-bg" cx="46" cy="46" r="40"></circle>
+        <circle class="ring-fg" id="ringFg" cx="46" cy="46" r="40"></circle>
+      </svg>
+      <div class="ring-num">
+        <span class="n" id="ringPct">0%</span>
+        <span class="d">visto</span>
+      </div>
+    </div>
+  </div>
+
+  <ul class="case-list" id="caseList"></ul>
+
+  <div class="closed-section">
+    <button class="closed-toggle" id="closedToggle" aria-expanded="false" aria-controls="closedList">
+      <span>Expedientes cerrados</span>
+      <span class="closed-toggle-count" id="closedCount">0</span>
+      <span class="closed-toggle-arrow">▾</span>
+    </button>
+    <ul class="case-list closed-list" id="closedList" hidden></ul>
+  </div>
+
+  <footer>
+    <div class="footer-note">Tu progreso se guarda automáticamente<span class="save-flag" id="saveFlag">· guardado ✓</span></div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
