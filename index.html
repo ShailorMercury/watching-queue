@@ -3,66 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Expediente T-2026-DOOM</title>
+<title>Archivo de Expedientes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/shared.css">
+<style>
+  .folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+    padding: 26px 30px 30px;
+  }
+
+  .folder-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--paper-dim);
+    border: 1.5px solid var(--line-strong);
+    border-radius: 3px;
+    padding: 18px 16px 16px;
+    padding-top: 30px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .folder-card::before {
+    content: attr(data-tab);
+    position: absolute;
+    top: -11px;
+    left: 16px;
+    background: var(--stamp);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 2px 2px 0 0;
+  }
+
+  .folder-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -8px rgba(0,0,0,0.35);
+    border-color: var(--stamp);
+  }
+
+  .folder-card:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+  .folder-title {
+    font-family: 'Special Elite', monospace;
+    font-size: 17px;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+
+  .folder-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+    margin-bottom: 12px;
+  }
+
+  .folder-rail {
+    height: 8px;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .folder-rail-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--stamp));
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .folder-pct {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  .folder-card.placeholder {
+    background: transparent;
+    border-style: dashed;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 108px;
+    cursor: default;
+    padding-top: 18px;
+  }
+
+  .folder-card.placeholder:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line-strong);
+  }
+
+  .folder-card.placeholder::before { display: none; }
+
+  .placeholder-icon { font-size: 20px; margin-bottom: 6px; opacity: 0.6; }
+  .placeholder-text { font-size: 12px; }
+</style>
 </head>
 <body>
 
 <div class="sheet">
   <header>
     <div class="case-row">
-      <div class="case-id">Expediente N.º T-2026-DOOM &nbsp;·&nbsp; Rama: Vigilancia Multiversal</div>
-      <div class="stamp-tag" id="statusStamp">En curso</div>
+      <div class="case-id">Archivo Central &nbsp;·&nbsp; Todos los expedientes</div>
+      <div class="stamp-tag">Activo</div>
     </div>
-    <h1>Ruta a Avengers: Doomsday</h1>
-    <p class="subtitle">Orden de visionado recomendado antes del estreno. Marca cada expediente cerrado — el registro queda guardado.</p>
-    <div class="meta-strip">
-      <span>Estreno: <b>18 dic 2026</b></span>
-      <span id="countdownText">Calculando cuenta atrás…</span>
-      <span>Sede: <b>Disney+ / Cines</b></span>
-    </div>
+    <h1>Mis Expedientes</h1>
+    <p class="subtitle">Cada carpeta es un checklist. Entra a la que te interese para ir marcando tu progreso.</p>
   </header>
 
-  <div class="progress-block">
-    <div class="rail-wrap">
-      <div class="rail-label">
-        <span>Progreso del expediente</span>
-        <span id="countText">0 / 20 cerrados</span>
-      </div>
-      <div class="rail">
-        <div class="rail-fill" id="railFill"></div>
-      </div>
-    </div>
-    <div class="ring-wrap">
-      <svg width="92" height="92" viewBox="0 0 92 92">
-        <circle class="ring-bg" cx="46" cy="46" r="40"></circle>
-        <circle class="ring-fg" id="ringFg" cx="46" cy="46" r="40"></circle>
-      </svg>
-      <div class="ring-num">
-        <span class="n" id="ringPct">0%</span>
-        <span class="d">visto</span>
-      </div>
-    </div>
-  </div>
+  <div class="folder-grid">
+    <a class="folder-card" data-tab="MCU" href="doomsday/index.html">
+      <p class="folder-title">Ruta a Avengers: Doomsday</p>
+      <p class="folder-meta">20 títulos · estreno 18 dic 2026</p>
+      <div class="folder-rail"><div class="folder-rail-fill" id="doomsdayFill"></div></div>
+      <div class="folder-pct" id="doomsdayPct">Cargando…</div>
+    </a>
 
-  <ul class="case-list" id="caseList"></ul>
-
-  <div class="closed-section">
-    <button class="closed-toggle" id="closedToggle" aria-expanded="false" aria-controls="closedList">
-      <span>Expedientes cerrados</span>
-      <span class="closed-toggle-count" id="closedCount">0</span>
-      <span class="closed-toggle-arrow">▾</span>
-    </button>
-    <ul class="case-list closed-list" id="closedList" hidden></ul>
+    <div class="folder-card placeholder">
+      <div class="placeholder-icon">＋</div>
+      <div class="placeholder-text">Próxima carpeta<br>(aún sin abrir)</div>
+    </div>
   </div>
 
   <footer>
-    <div class="footer-note">Tu progreso se guarda automáticamente<span class="save-flag" id="saveFlag">· guardado ✓</span></div>
+    <div class="footer-note">Archivo personal · guardado en este navegador</div>
   </footer>
 </div>
 
-<script src="script.js"></script>
+<script>
+  // Lee el progreso del checklist de Doomsday directamente de su localStorage
+  // para mostrar el % ya en la portada, sin tener que entrar.
+  try {
+    const raw = localStorage.getItem("doomsday-checklist-state");
+    const state = raw ? JSON.parse(raw) : {};
+    const total = 20;
+    const done = Object.values(state).filter(Boolean).length;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById("doomsdayFill").style.width = pct + "%";
+    document.getElementById("doomsdayPct").textContent = `${done} / ${total} · ${pct}%`;
+  } catch (e) {
+    document.getElementById("doomsdayPct").textContent = "Sin empezar";
+  }
+</script>
+
 </body>
 </html>
