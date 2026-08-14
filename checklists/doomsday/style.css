@@ -94,7 +94,7 @@ ul.case-list {
   padding: 0;
 }
 
-/* tab nav — folder-tab look */
+/* tab nav — folder-tab look (marcador de carpeta) */
 .tab-nav {
   display: flex;
   gap: 4px;
@@ -129,6 +129,62 @@ ul.case-list {
 }
 
 .tab-btn:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+.tab-count {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 9.5px;
+  background: var(--paper-deep);
+  border-radius: 8px;
+  padding: 1px 6px;
+  color: var(--ink-soft);
+}
+
+.tab-btn.active .tab-count { background: var(--stamp); color: var(--paper); }
+
+/* sub-filtro tipo interruptor — deliberadamente distinto a las pestañas de arriba,
+   para que se lea como un filtro dentro de la sección y no como otro nivel de navegación */
+.subtab-nav {
+  display: inline-flex;
+  gap: 2px;
+  margin: 18px 30px 4px;
+  padding: 3px;
+  background: var(--paper-dim);
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+}
+
+.subtab-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.subtab-btn:hover { color: var(--ink); }
+
+.subtab-btn.active {
+  background: var(--teal);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.subtab-btn:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+
+.subtab-btn .tab-count {
+  background: rgba(36,28,21,0.08);
+  border: none;
+}
+
+.subtab-btn.active .tab-count { background: rgba(255,255,255,0.25); color: var(--paper); }
+
 
 /* dashboard stat cards */
 .stat-grid {
@@ -235,6 +291,74 @@ ul.case-list {
 .next-card-btn:hover { background: var(--gold); color: var(--paper); }
 .next-card-btn:focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
 
+/* info extra del catálogo — puramente informativo, no afecta al progreso */
+.catalog-stats {
+  margin: 26px 30px 24px;
+  padding-top: 20px;
+  border-top: 1.5px dashed var(--line-strong);
+}
+
+.catalog-stats-title {
+  font-family: 'Special Elite', monospace;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 0 0 16px;
+}
+
+.catalog-group { margin-bottom: 18px; }
+.catalog-group:last-child { margin-bottom: 0; }
+
+.catalog-group-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 8px;
+}
+
+.stat-bar-row {
+  display: grid;
+  grid-template-columns: 108px 1fr 34px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.stat-bar-label {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-bar-track {
+  height: 8px;
+  background: var(--paper-dim);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.stat-bar-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+@media (max-width: 560px) {
+  .catalog-stats { margin-left: 16px; margin-right: 16px; }
+  .stat-bar-row { grid-template-columns: 82px 1fr 28px; gap: 6px; }
+}
+
 #tabExpedientes .progress-block,
 #tabExpedientes .rail { }
 
@@ -290,12 +414,65 @@ ul.case-list {
   text-decoration-thickness: 1.5px;
 }
 
+.empty-note {
+  padding: 30px;
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.watched-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px dashed var(--line);
+}
+
+.watched-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--teal);
+}
+
+.popcorn-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.popcorn-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 1px 2px;
+  opacity: 0.28;
+  filter: grayscale(1);
+  transition: opacity 0.15s ease, filter 0.15s ease, transform 0.15s ease;
+  line-height: 1;
+}
+
+.popcorn-btn:hover { transform: scale(1.15); }
+.popcorn-btn:focus-visible { outline: 2px solid var(--stamp); outline-offset: 1px; }
+
+.popcorn-btn.filled {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
 @keyframes entryIn {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.entry { animation: entryIn 0.28s ease both; }
+/* la animación ya no se aplica por defecto a toda la lista —
+   solo se añade puntualmente vía JS a la fila que acaba de cambiar,
+   así el resto no "parpadea" cada vez que marcas algo */
+.entry.just-changed { animation: entryIn 0.28s ease both; }
 
 .entry {
   display: grid;
@@ -347,6 +524,15 @@ ul.case-list {
 
 .entry.done .entry-title { color: var(--ink-soft); }
 
+.why-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 3px;
+}
+
 .entry-why {
   font-size: 12.5px;
   color: var(--ink-soft);
@@ -375,6 +561,11 @@ ul.case-list {
 .badge.type-movie { background: rgba(43,110,99,0.1); border-color: rgba(43,110,99,0.35); color: var(--teal); }
 .badge.type-show { background: rgba(180,64,31,0.09); border-color: rgba(180,64,31,0.32); color: var(--stamp-dark); }
 .badge.where { color: var(--ink-faint); }
+
+.badge.universe--mcu { color: var(--teal); border-color: rgba(43,110,99,0.35); background: rgba(43,110,99,0.08); }
+.badge.universe--fox { color: var(--stamp-dark); border-color: rgba(180,64,31,0.32); background: rgba(180,64,31,0.08); }
+.badge.universe--sony { color: var(--gold); border-color: rgba(169,124,47,0.4); background: rgba(169,124,47,0.08); }
+.badge.universe--legacy { color: var(--ink-soft); border-color: var(--line-strong); background: var(--paper-dim); }
 
 /* episode sub-panel */
 .ep-toggle {
@@ -440,7 +631,9 @@ ul.case-list {
 
 .check-cell {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   padding-top: 2px;
 }
 
@@ -481,6 +674,50 @@ ul.case-list {
   opacity: 1;
   transform: scale(1) rotate(-10deg);
 }
+
+/* archivar — deliberadamente discreto, solo texto + icono pequeño */
+.archive-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  opacity: 0.65;
+  padding: 2px 3px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.archive-link:hover { opacity: 1; color: var(--gold); }
+.archive-link:focus-visible { outline: 1.5px solid var(--stamp); outline-offset: 1px; opacity: 1; }
+.archive-link .icon { font-size: 10px; }
+
+.restore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+  padding: 5px 10px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.restore-link:hover { border-color: var(--teal); color: var(--teal); }
+.restore-link:focus-visible { outline: 2px solid var(--stamp); outline-offset: 1px; }
+
+.archived-list .entry-title { color: var(--ink-faint); }
+.archived-list .entry { opacity: 0.75; }
+.archived-list .entry:hover { opacity: 1; }
 
 @media (max-width: 560px) {
   .entry { grid-template-columns: 34px 1fr auto; padding: 14px 16px; gap: 10px; }
