@@ -92,18 +92,39 @@
       <div class="next-card-title" id="nextTitle">—</div>
       <button class="next-card-btn" id="nextCardBtn">Ir al expediente →</button>
     </div>
+
+    <div class="catalog-stats">
+      <p class="catalog-stats-title">Info extra del catálogo</p>
+      <div class="catalog-group">
+        <p class="catalog-group-label">Por universo</p>
+        <div id="universeStats"></div>
+      </div>
+      <div class="catalog-group">
+        <p class="catalog-group-label">Por plataforma</p>
+        <div id="platformStats"></div>
+      </div>
+    </div>
   </div>
 
   <div id="tabExpedientes" role="tabpanel" hidden>
-    <ul class="case-list" id="caseList"></ul>
+    <div class="subtab-nav" role="tablist">
+      <button class="subtab-btn active" id="subtabBtnAbiertos" role="tab" aria-selected="true" aria-controls="subtabAbiertos">Abiertos <span class="tab-count" id="openCount">20</span></button>
+      <button class="subtab-btn" id="subtabBtnCerrados" role="tab" aria-selected="false" aria-controls="subtabCerrados">Cerrados <span class="tab-count" id="tabClosedCount">0</span></button>
+      <button class="subtab-btn" id="subtabBtnArchivados" role="tab" aria-selected="false" aria-controls="subtabArchivados">Archivados <span class="tab-count" id="archivedCount">0</span></button>
+    </div>
 
-    <div class="closed-section">
-      <button class="closed-toggle" id="closedToggle" aria-expanded="false" aria-controls="closedList">
-        <span>Expedientes cerrados</span>
-        <span class="closed-toggle-count" id="closedCount">0</span>
-        <span class="closed-toggle-arrow">▾</span>
-      </button>
-      <ul class="case-list closed-list" id="closedList" hidden></ul>
+    <div id="subtabAbiertos" role="tabpanel">
+      <ul class="case-list" id="caseList"></ul>
+    </div>
+
+    <div id="subtabCerrados" role="tabpanel" hidden>
+      <ul class="case-list closed-list" id="closedList"></ul>
+      <p class="empty-note" id="closedEmptyNote">Aún no has cerrado ningún expediente.</p>
+    </div>
+
+    <div id="subtabArchivados" role="tabpanel" hidden>
+      <ul class="case-list archived-list" id="archivedList"></ul>
+      <p class="empty-note" id="archivedEmptyNote">No has archivado ningún expediente.</p>
     </div>
   </div>
 
