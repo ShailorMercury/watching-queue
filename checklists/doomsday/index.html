@@ -5,114 +5,160 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Expediente T-2026-DOOM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/shared.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="page-wrap"><a class="back-link" href="../../index.html">← Volver al archivo</a></div>
-<div class="sheet">
-  <header>
-    <div class="case-row">
-      <div class="case-id">Expediente N.º T-2026-DOOM &nbsp;·&nbsp; Rama: Vigilancia Multiversal</div>
-      <div class="stamp-tag" id="statusStamp">En curso</div>
-    </div>
-    <h1>Ruta a Avengers: Doomsday</h1>
-    <p class="subtitle">Orden de visionado recomendado antes del estreno. Marca cada expediente cerrado — el registro queda guardado.</p>
-    <div class="meta-strip">
-      <span>Estreno: <b>18 dic 2026</b></span>
-      <span id="countdownText">Calculando cuenta atrás…</span>
-      <span>Sede: <b>Disney+ / Cines</b></span>
-    </div>
-  </header>
 
-  <div class="tab-nav" role="tablist">
-    <button class="tab-btn active" id="tabBtnResumen" role="tab" aria-selected="true" aria-controls="tabResumen">Resumen general</button>
-    <button class="tab-btn" id="tabBtnExpedientes" role="tab" aria-selected="false" aria-controls="tabExpedientes">Expedientes</button>
+<div class="case-wrap">
+  <div class="sheet sheet--header">
+    <div class="archive-tag">
+      <span class="archive-tag-label">Archivo</span>
+      <span class="archive-tag-num">065</span>
+      <span class="archive-tag-sub">DOOM</span>
+    </div>
+    <header>
+      <div class="case-row">
+        <div class="case-id">Expediente N.º T-2026-DOOM &nbsp;·&nbsp; Rama: Vigilancia Multiversal</div>
+      </div>
+      <h1>Ruta a Avengers: Doomsday</h1>
+      <p class="subtitle">Orden de visionado recomendado. Cada título funciona como un expediente independiente dentro de la ruta.</p>
+      <div class="meta-strip">
+        <span>Estreno: <b>18 dic 2026</b></span>
+        <span id="countdownText">Calculando cuenta atrás…</span>
+        <div class="header-mini-rail-wrap">
+          <span class="header-mini-rail-label">Progreso</span>
+          <div class="header-mini-rail"><div class="header-mini-rail-fill" id="notchRailFill"></div></div>
+          <span class="header-mini-pct" id="notchRailPct">0%</span>
+        </div>
+        <div class="stamp-tag" id="statusStamp">Sin abrir</div>
+      </div>
+    </header>
   </div>
 
+  <div class="tab-nav" role="tablist">
+    <button class="tab-btn active" id="tabBtnResumen" role="tab" aria-selected="true" aria-controls="tabResumen">Expediente resumen</button>
+    <button class="tab-btn" id="tabBtnExpedientes" role="tab" aria-selected="false" aria-controls="tabExpedientes">Checklist</button>
+  </div>
+
+  <div class="notch-tab" id="notchResumen">Progresión</div>
+  <div class="subtab-nav" id="notchExpedientes" role="tablist" hidden>
+    <button class="subtab-btn active" id="subtabBtnAbiertos" role="tab" aria-selected="true" aria-controls="subtabAbiertos">Abiertos <span class="tab-count" id="openCount">20</span></button>
+    <button class="subtab-btn" id="subtabBtnCerrados" role="tab" aria-selected="false" aria-controls="subtabCerrados">Cerrados <span class="tab-count" id="tabClosedCount">0</span></button>
+    <button class="subtab-btn" id="subtabBtnArchivados" role="tab" aria-selected="false" aria-controls="subtabArchivados">Archivados <span class="tab-count" id="archivedCount">0</span></button>
+  </div>
+
+  <div class="sheet sheet--body">
   <div id="tabResumen" role="tabpanel">
     <div class="progress-block">
-      <div class="rail-wrap">
-        <div class="rail-label">
-          <span>Progreso del expediente</span>
+      <div class="progress-chart-wrap">
+        <p class="progress-chart-label">
+          <span class="progress-chart-title">
+            Progreso por
+            <select id="chartGranularity" class="chart-granularity-select" aria-label="Agrupar gráfica por">
+              <option value="day">día</option>
+              <option value="week">semana</option>
+              <option value="month">mes</option>
+            </select>
+          </span>
           <span id="countText">0 / 20 cerrados</span>
+        </p>
+        <div class="chart-legend">
+          <span class="chart-legend-item chart-legend-item--movie"><span class="sw"></span>Películas</span>
+          <span class="chart-legend-item chart-legend-item--episode"><span class="sw"></span>Capítulos</span>
         </div>
-        <div class="rail">
-          <div class="rail-fill" id="railFill"></div>
-        </div>
+        <div class="progress-chart" id="progressChart"></div>
       </div>
-      <div class="ring-wrap">
-        <svg width="92" height="92" viewBox="0 0 92 92">
-          <circle class="ring-bg" cx="46" cy="46" r="40"></circle>
-          <circle class="ring-fg" id="ringFg" cx="46" cy="46" r="40"></circle>
-        </svg>
-        <div class="ring-num">
-          <span class="n" id="ringPct">0%</span>
-          <span class="d">visto</span>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-num" id="statTotal">20</span>
+          <span class="stat-label">Títulos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num accent-gold" id="statTiempoTotal">—</span>
+          <span class="stat-label">Duración</span>
         </div>
       </div>
     </div>
 
-    <div class="stat-grid">
-      <div class="stat-card">
-        <span class="stat-num" id="statTotal">20</span>
-        <span class="stat-label">Total títulos</span>
+    <div class="status-type-row">
+      <div class="status-block">
+        <p class="status-type-label">Por estado</p>
+        <div class="status-donut-row">
+          <div class="status-donut" id="statusDonut"></div>
+          <div class="status-legend" id="statusLegend"></div>
+        </div>
       </div>
-      <div class="stat-card">
-        <span class="stat-num accent-teal" id="statVistos">0</span>
-        <span class="stat-label">Vistos</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-num accent-stamp" id="statPendientes">20</span>
-        <span class="stat-label">Pendientes</span>
+      <div class="type-block type-block--boxed">
+        <p class="status-type-label">Por tipo</p>
+        <div class="type-row">
+          <div class="type-row-label">
+            <span>🎬 Películas</span>
+            <span id="movieCount">0/15</span>
+          </div>
+          <div class="rail rail--sm"><div class="rail-fill rail-fill--teal" id="movieRail"></div></div>
+        </div>
+        <div class="type-row">
+          <div class="type-row-label">
+            <span>📺 Series</span>
+            <span id="showCount">0/5</span>
+          </div>
+          <div class="rail rail--sm"><div class="rail-fill rail-fill--stamp" id="showRail"></div></div>
+        </div>
       </div>
     </div>
 
-    <div class="type-block">
-      <div class="type-row">
-        <div class="type-row-label">
-          <span>🎬 Películas</span>
-          <span id="movieCount">0/15</span>
+    <div class="info-row">
+      <div class="next-card" id="nextCard">
+        <div class="next-card-top">
+          <div class="next-card-label">Próximo expediente</div>
+          <div class="next-card-time-left" id="nextCardTimeLeft">Quedan —</div>
         </div>
-        <div class="rail rail--sm"><div class="rail-fill rail-fill--teal" id="movieRail"></div></div>
-      </div>
-      <div class="type-row">
-        <div class="type-row-label">
-          <span>📺 Series</span>
-          <span id="showCount">0/5</span>
+        <div class="next-card-preview">
+          <div class="exp-badge exp-badge--sm" id="nextExpBadge">Exp.<span class="num" id="nextExpNum">001</span></div>
+          <div class="next-card-info">
+            <div class="next-card-title" id="nextTitle">—</div>
+            <div class="next-card-episode" id="nextEpisode"></div>
+            <div class="badge-row" id="nextBadgeRow"></div>
+          </div>
         </div>
-        <div class="rail rail--sm"><div class="rail-fill rail-fill--stamp" id="showRail"></div></div>
+        <button class="next-card-btn" id="nextCardBtn">Abrir expediente →</button>
       </div>
-    </div>
 
-    <div class="next-card" id="nextCard">
-      <div class="next-card-label">Próximo en la lista</div>
-      <div class="next-card-title" id="nextTitle">—</div>
-      <button class="next-card-btn" id="nextCardBtn">Ir al expediente →</button>
+      <div class="phase-tracker" id="phaseTracker">
+        <p class="phase-tracker-label">Recorrido por las fases</p>
+        <div class="phase-dots" id="phaseDots"></div>
+        <div class="phase-tracker-current">
+          <span class="phase-tracker-name" id="phaseTrackerName">—</span>
+          <span class="phase-tracker-progress" id="phaseTrackerProgress"></span>
+        </div>
+      </div>
     </div>
 
     <div class="catalog-stats">
-      <p class="catalog-stats-title">Info extra del catálogo</p>
-      <div class="catalog-group">
-        <p class="catalog-group-label">Por universo</p>
-        <div id="universeStats"></div>
-      </div>
-      <div class="catalog-group">
-        <p class="catalog-group-label">Por plataforma</p>
-        <div id="platformStats"></div>
+      <p class="catalog-stats-title">Gráficas del catálogo</p>
+      <div class="catalog-groups-row">
+        <div class="catalog-group">
+          <div class="donut-chart-lg" id="universeDonut"></div>
+          <p class="donut-info" id="universeDonutInfo">Toca una porción para ver el detalle</p>
+        </div>
+        <div class="catalog-group">
+          <div class="donut-chart-lg" id="platformDonut"></div>
+          <p class="donut-info" id="platformDonutInfo">Toca una porción para ver el detalle</p>
+        </div>
+        <div class="catalog-group">
+          <div class="donut-chart-lg" id="phaseDonut"></div>
+          <p class="donut-info" id="phaseDonutInfo">Toca una porción para ver el detalle</p>
+        </div>
       </div>
     </div>
   </div>
 
   <div id="tabExpedientes" role="tabpanel" hidden>
-    <div class="subtab-nav" role="tablist">
-      <button class="subtab-btn active" id="subtabBtnAbiertos" role="tab" aria-selected="true" aria-controls="subtabAbiertos">Abiertos <span class="tab-count" id="openCount">20</span></button>
-      <button class="subtab-btn" id="subtabBtnCerrados" role="tab" aria-selected="false" aria-controls="subtabCerrados">Cerrados <span class="tab-count" id="tabClosedCount">0</span></button>
-      <button class="subtab-btn" id="subtabBtnArchivados" role="tab" aria-selected="false" aria-controls="subtabArchivados">Archivados <span class="tab-count" id="archivedCount">0</span></button>
-    </div>
-
     <div id="subtabAbiertos" role="tabpanel">
       <ul class="case-list" id="caseList"></ul>
     </div>
@@ -129,8 +175,9 @@
   </div>
 
   <footer>
-    <div class="footer-note">Tu progreso se guarda automáticamente<span class="save-flag" id="saveFlag">· guardado ✓</span></div>
+    <div class="footer-note"><span class="save-flag" id="saveFlag">· guardado ✓</span></div>
   </footer>
+  </div>
 </div>
 
 <script src="script.js"></script>
